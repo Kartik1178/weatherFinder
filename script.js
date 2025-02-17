@@ -1,5 +1,6 @@
 const weatherinput = document.querySelector('.inputbox');
 const searchbutton = document.querySelector('#search');
+const weatherbox = document.querySelector('.weatherbox');
 
 searchbutton.addEventListener('click', function () {
     const inputvalue = weatherinput.value.trim();
@@ -70,14 +71,26 @@ async function findweather(location) {
         const sentimentScore = await analyzeSentiment(descriptionText);
         console.log("Sentiment Score:", sentimentScore);
 
-        if (sentimentScore < 0.4) {
-            alert("⚠️ Weather Alert: Conditions might be rough. Stay safe!");
-        }
+        // Change weatherbox background based on sentiment
+        updateWeatherBoxStyle(sentimentScore);
         
     } catch (err) {
         console.log("Can't find location");
         weatherin.innerHTML = err;
         clearWeatherDetails(weatherparameters);
+    }
+}
+
+// Update weather box color
+function updateWeatherBoxStyle(score) {
+    weatherbox.classList.remove("positive", "neutral", "negative");
+
+    if (score >= 0.7) {
+        weatherbox.classList.add("positive");
+    } else if (score >= 0.4) {
+        weatherbox.classList.add("neutral");
+    } else {
+        weatherbox.classList.add("negative");
     }
 }
 

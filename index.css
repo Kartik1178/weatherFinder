@@ -67,3 +67,14 @@ i{ margin-left: 10px;
     display: flex; 
     flex-direction: column;
 }
+.weatherbox.positive {
+    background-color: #2ecc71; /* Green */
+}
+
+.weatherbox.neutral {
+    background-color: #f1c40f; /* Yellow */
+}
+
+.weatherbox.negative {
+    background-color: #e74c3c; /* Red */
+}
